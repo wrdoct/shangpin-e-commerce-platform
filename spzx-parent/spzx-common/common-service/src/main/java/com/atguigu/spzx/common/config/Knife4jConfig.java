@@ -7,6 +7,13 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @Tag： 用在controller类上，对controller进行说明
+ * @Operation: 用在controller接口方法上对接口进行描述
+ * @Parameters： 用在controller接口方法上对单个参数进行描述
+ * @Schema： 用在实体类和实体类属性上，对实体类以及实体类属性进行描述
+ */
+
 @Configuration
 public class Knife4jConfig {
 

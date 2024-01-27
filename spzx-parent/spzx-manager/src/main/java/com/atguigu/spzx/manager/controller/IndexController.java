@@ -28,4 +28,5 @@ public class IndexController {
         LoginVo loginvo = sysUserService.login(loginDto);
         return Result.build(loginvo, ResultCodeEnum.SUCCESS);
     }
+
 }

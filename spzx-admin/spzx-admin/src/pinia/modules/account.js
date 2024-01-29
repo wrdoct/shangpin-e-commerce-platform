@@ -14,7 +14,7 @@ import { GetUserinfo } from '@/api/login'
 
 export const useAccount = defineStore('account', {
   state: () => ({
-    userinfo: null,
+    userinfo: null, // pinia账户模块存储的用户信息
     permissionList: [],
   }),
   actions: {
@@ -24,7 +24,7 @@ export const useAccount = defineStore('account', {
     },
     // 获取用户信息
     async getUserinfo() {
-      const { code, data } = await GetUserinfo()
+      const { code, data } = await GetUserinfo() // 调用/api/login.js中的GetUserinfo方法，请求后端接口
       if (+code === 200) {
         this.userinfo = data
         return Promise.resolve(data)

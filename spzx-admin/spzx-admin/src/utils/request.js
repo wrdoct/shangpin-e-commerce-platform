@@ -43,9 +43,13 @@ const service = axios.create({
 // 拦截请求
 service.interceptors.request.use(
   config => {
-    const { authorization } = useApp()
+    const { authorization } = useApp() // 从Pinia的app模块中获取登录成功以后的用户数据
     if (authorization) {
-      config.headers.Authorization = `Bearer ${authorization.token}`
+      // 添加一个请求头Authorization ， 该请求头所对应的值为：Bearer token数据
+      // config.headers.Authorization = `Bearer ${authorization.token}`
+      
+      // 上传传递方式后端解析太麻烦，因此可以更改传递token方式为如下方式
+      config.headers.Authorization = `${authorization.token}`  // 把token放到请求头里面
     }
     return config
   },

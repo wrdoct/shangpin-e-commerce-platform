@@ -49,7 +49,7 @@ service.interceptors.request.use(
       // config.headers.Authorization = `Bearer ${authorization.token}`
       
       // 上传传递方式后端解析太麻烦，因此可以更改传递token方式为如下方式
-      config.headers.Authorization = `${authorization.token}`  // 把token放到请求头里面
+      config.headers.token = `${authorization.token}`  // 把token放到请求头里面
     }
     return config
   },

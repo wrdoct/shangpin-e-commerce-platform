@@ -35,7 +35,7 @@ public class SysUserServiceImpl implements SysUserService {
         String codeKey = loginDto.getCodeKey();     // Redis中验证码的数据key
         // 从Redis中获取验证码
         String redisCode = redisTemplate.opsForValue().get("user:login:validatecode:" + codeKey);
-        if (StrUtil.isEmpty(redisCode) || StrUtil.equalsIgnoreCase(redisCode, captcha)) {
+        if (StrUtil.isEmpty(redisCode) || !StrUtil.equalsIgnoreCase(redisCode, captcha)) {
             throw new GuiguException(ResultCodeEnum.VALIDATECODE_ERROR);
         }
         // 验证通过 删除Redis中的验证码
@@ -74,6 +74,11 @@ public class SysUserServiceImpl implements SysUserService {
         String userJson = redisTemplate.opsForValue().get("user:login" + token);
         SysUser sysUser = JSON.parseObject(userJson, SysUser.class);
         return sysUser;
+    }
+
+    @Override
+    public void logout(String token) {
+        redisTemplate.delete("user:login" + token);
     }
 
 }

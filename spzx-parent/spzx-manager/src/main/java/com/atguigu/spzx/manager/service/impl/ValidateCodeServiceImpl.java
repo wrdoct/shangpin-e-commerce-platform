@@ -22,7 +22,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 
         // 使用hutool工具包中的工具类生成图片验证码
         //参数：宽  高  验证码位数 干扰线数量
-        CircleCaptcha circleCaptcha = CaptchaUtil.createCircleCaptcha(150, 48, 4, 20);
+        CircleCaptcha circleCaptcha = CaptchaUtil.createCircleCaptcha(150, 48, 4, 10);
         String codeValue = circleCaptcha.getCode(); // 4位验证码值
         String imageBase64 = circleCaptcha.getImageBase64(); // 返回图片验证码，base64编码
         // 生成uuid作为图片验证码的key

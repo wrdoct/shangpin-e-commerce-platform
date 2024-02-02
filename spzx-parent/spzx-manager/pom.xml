@@ -54,6 +54,13 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.3</version>
         </dependency>
+
+        <!--封装配置文件内容的实体类UserAuthProperties使用ConfigurationProperties需要的依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

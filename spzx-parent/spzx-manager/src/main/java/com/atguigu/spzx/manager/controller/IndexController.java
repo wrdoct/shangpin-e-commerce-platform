@@ -8,6 +8,7 @@ import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.LoginVo;
 import com.atguigu.spzx.model.vo.system.ValidateCodeVo;
+import com.atguigu.spzx.utils.AuthContextUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,13 +34,18 @@ public class IndexController {
     }
 
     // 获取当前登录用户信息
+//    @Operation(summary = "获取当前登录用户信息")
+//    @GetMapping(value = "/getUserInfo")
+////    public Result getUserInfo(HttpServletRequest request) {
+////        String token = request.getHeader("token");
+//    public Result getUserInfo(@RequestHeader(name = "token") String token) {
+//        SysUser sysUser = sysUserService.getUserInfo(token);
+//        return Result.build(sysUser, ResultCodeEnum.SUCCESS);
+//    }
     @Operation(summary = "获取当前登录用户信息")
     @GetMapping(value = "/getUserInfo")
-//    public Result getUserInfo(HttpServletRequest request) {
-//        String token = request.getHeader("token");
-    public Result getUserInfo(@RequestHeader(name = "token") String token) {
-        SysUser sysUser = sysUserService.getUserInfo(token);
-        return Result.build(sysUser, ResultCodeEnum.SUCCESS);
+    public Result getUserInfo() {
+        return Result.build(AuthContextUtil.get(), ResultCodeEnum.SUCCESS);
     }
 
     // 生成图片验证码

@@ -29,7 +29,6 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public LoginVo login(LoginDto loginDto) {
-
         // 校验验证码是否正确
         String captcha = loginDto.getCaptcha();     // 用户输入的验证码
         String codeKey = loginDto.getCodeKey();     // Redis中验证码的数据key

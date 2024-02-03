@@ -135,7 +135,7 @@ const editShow = (row) => {
 const submit = async () => {
     if(!sysRole.value.id) {
         const { code } = await SaveSysRole(sysRole.value) ;
-        if(code === 200) {
+        if(code === 200) { // 三个等号--既比较值也比较类型
             dialogVisible.value = false
             ElMessage.success('操作成功')
             fetchData()

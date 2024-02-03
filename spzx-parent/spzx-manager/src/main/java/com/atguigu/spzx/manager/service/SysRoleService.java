@@ -9,4 +9,12 @@ public interface SysRoleService {
     // 分页角色列表
     PageInfo<SysRole> findByPage(SysRoleDto sysRoleDto, Integer pageNum, Integer pageSize);
 
+    // 添加角色
+    void saveSysRole(SysRole sysRole);
+
+    //修改角色
+    void updateSysRole(SysRole sysRole);
+
+    //删除角色
+    void deleteById(Long roleId);
 }

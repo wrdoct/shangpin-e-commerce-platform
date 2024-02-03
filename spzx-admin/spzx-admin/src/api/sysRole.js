@@ -14,3 +14,29 @@ export const GetSysRoleListByPage = (pageNum , pageSize , queryDto) => {
         // params: queryDto
     })
 }
+
+// 添加角色请求方法
+export const SaveSysRole = (data) => {
+    return request({
+        url: `${base_api}/saveSysRole`,
+        method: 'post',
+        data
+    })
+}
+
+// 修改角色请求方法
+export const UpdateSysRole = (data) => {
+    return request({
+        url: `${base_api}/updateSysRole`,
+        method: 'put',
+        data
+    })
+}
+
+// 删除角色
+export const DeleteSysRoleById = (roleId) => {
+    return request({
+        url: `${base_api}/deleteById/${roleId}`,
+        method: 'delete'
+    })
+}

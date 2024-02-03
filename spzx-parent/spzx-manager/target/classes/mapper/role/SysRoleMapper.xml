@@ -59,7 +59,7 @@
         id = #{id}
     </update>
 
-    <!--根据id删除角色-->
+    <!--根据id删除角色（逻辑删除）-->
     <delete id="deleteById">
         update sys_role set is_deleted=1 where id=#{roleId}
     </delete>

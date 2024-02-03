@@ -128,8 +128,16 @@ const fetchData = async () => {
 
 //进入添加
 const addShow = () => {
+    resetForm()
   	dialogVisible.value = true
 }
+
+// 复位到窗口的初始值
+const resetForm = () => {  
+    sysRole.value.roleCode = ""
+    sysRole.value.roleName = ""
+    sysRole.value.description = ""
+}  
 
 // 修改按钮点击事件处理函数
 const editShow = (row) => {

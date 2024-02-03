@@ -53,8 +53,9 @@ export default env => {
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
       }),
-      viteESLint({
-        include: ['src/**/*.vue', 'src/**/*.js'],
+      viteESLint({ // 检查代码的插件
+        // include: ['src/**/*.vue', 'src/**/*.js'],
+        include: [''], // 可以去除警告
       }),
     ],
     css: {

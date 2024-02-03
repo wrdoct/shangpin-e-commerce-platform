@@ -127,7 +127,7 @@ const addShow = () => {
 
 // 修改按钮点击事件处理函数
 const editShow = (row) => {
-    sysRole.value = row
+    sysRole.value = {...row} // ...--对象拓展运算符，表示值的复制
     dialogVisible.value = true
 }
 

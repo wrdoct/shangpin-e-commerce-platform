@@ -27,6 +27,7 @@ public class IndexController {
     private ValidateCodeService validateCodeService;
 
     // 用户退出
+    @Operation(summary = "用户退出")
     @GetMapping(value = "/logout")
     public Result logout(@RequestHeader(value = "token") String token) {
         sysUserService.logout(token) ;

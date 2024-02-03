@@ -23,11 +23,13 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     // 拦截器注册
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        String[] excludePatterns = new String[]{ "/swagger-resources/**", "/webjars/**", "/v3/**", "/doc.html/**" }; // 对swagger(Knife4j)的请求不进行拦截
         registry.addInterceptor(loginAuthInterceptor)
 //                .excludePathPatterns("/admin/system/index/login" ,
 //                        "/admin/system/index/generateValidateCode") // 哪些不需要拦截
                 .excludePathPatterns(userAuthProperties.getNoAuthUrls())
-                .addPathPatterns("/**"); // 哪些需要拦截
+                .addPathPatterns("/**") // 哪些需要拦截
+                .excludePathPatterns(excludePatterns);
     }
 
     // 跨域

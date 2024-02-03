@@ -113,7 +113,7 @@ const searchSysRole = () => {
     fetchData() ;
 }
 
-// 重置
+// 重置按钮
 const resetData = () => {
     queryDto.value.roleName = ""
     fetchData() ;
@@ -132,7 +132,7 @@ const addShow = () => {
   	dialogVisible.value = true
 }
 
-// 复位到窗口的初始值
+// 复位到“添加或修改角色”窗口的初始值--全为空
 const resetForm = () => {  
     sysRole.value.roleCode = ""
     sysRole.value.roleName = ""

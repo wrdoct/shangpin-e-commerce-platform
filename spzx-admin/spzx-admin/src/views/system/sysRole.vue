@@ -31,6 +31,9 @@
                 <el-form-item label="角色Code">
                     <el-input  v-model="sysRole.roleCode"/>
                 </el-form-item>
+                <el-form-item label="描述">
+                    <el-input  v-model="sysRole.description"/>
+                </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submit">提交</el-button>
                     <el-button @click="dialogVisible = false">取消</el-button>
@@ -42,7 +45,9 @@
         <el-table :data="list" style="width: 100%">
             <el-table-column prop="roleName" label="角色名称" width="180" />
             <el-table-column prop="roleCode" label="角色code" width="180" />
+            <el-table-column prop="description" label="描述" width="180" />
             <el-table-column prop="createTime" label="创建时间" />
+            <el-table-column prop="updateTime" label="修改时间" />
             <el-table-column label="操作" align="center" width="280" #default="scope">
                 <el-button type="primary" size="small" @click="editShow(scope.row)">修改</el-button>
                 <el-button type="danger" size="small" @click="deleteById(scope.row)">删除</el-button>
@@ -93,7 +98,8 @@ const dialogVisible = ref(false)
 const defaultForm = {
     id: "",
     roleCode: "",
-    roleName: ""
+    roleName: "",
+    description: ""
 }
 const sysRole = ref(defaultForm)   // 使用ref包裹该对象，使用reactive不方便进行重置
 
@@ -138,6 +144,7 @@ const submit = async () => {
         if(code === 200) { // 三个等号--既比较值也比较类型
             dialogVisible.value = false
             ElMessage.success('操作成功')
+            pageParams.value.pageNum = 1
             fetchData()
         }
     }else {
@@ -145,6 +152,7 @@ const submit = async () => {
         if(code === 200) {
             dialogVisible.value = false
             ElMessage.success('操作成功')
+            pageParams.value.pageNum = 1
             fetchData()
         }
     }

@@ -9,6 +9,7 @@ import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.LoginVo;
+import com.atguigu.spzx.utils.RedisConstantsUtil;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,12 +34,12 @@ public class SysUserServiceImpl implements SysUserService {
         String captcha = loginDto.getCaptcha();     // 用户输入的验证码
         String codeKey = loginDto.getCodeKey();     // Redis中验证码的数据key
         // 从Redis中获取验证码
-        String redisCode = redisTemplate.opsForValue().get("user:login:validatecode:" + codeKey);
+        String redisCode = redisTemplate.opsForValue().get(RedisConstantsUtil.USER_LOGIN_VALIDATECODE + codeKey);
         if (StrUtil.isEmpty(redisCode) || !StrUtil.equalsIgnoreCase(redisCode, captcha)) {
             throw new GuiguException(ResultCodeEnum.VALIDATECODE_ERROR);
         }
         // 验证通过 删除Redis中的验证码
-        redisTemplate.delete("user:login:validatecode:" + codeKey) ;
+        redisTemplate.delete(RedisConstantsUtil.USER_LOGIN_VALIDATECODE + codeKey) ;
 
         // 根据用户名查询用户
         SysUser sysUser = sysUserMapper.selectByUserName(loginDto.getUserName());
@@ -56,7 +57,7 @@ public class SysUserServiceImpl implements SysUserService {
         // 生成令牌，保存数据到Redis中 // key: token    value: 用户信息
         String token = UUID.randomUUID().toString().replaceAll("-", "");
         redisTemplate.opsForValue()
-                .set("user:login"+token,
+                .set(RedisConstantsUtil.USER_LOGIN +token,
                         JSON.toJSONString(sysUser),
                         7,
                         TimeUnit.DAYS);
@@ -70,14 +71,14 @@ public class SysUserServiceImpl implements SysUserService {
     // 获取当前登录用户信息
     @Override
     public SysUser getUserInfo(String token) {
-        String userJson = redisTemplate.opsForValue().get("user:login" + token);
+        String userJson = redisTemplate.opsForValue().get(RedisConstantsUtil.USER_LOGIN + token);
         SysUser sysUser = JSON.parseObject(userJson, SysUser.class);
         return sysUser;
     }
 
     @Override
     public void logout(String token) {
-        redisTemplate.delete("user:login" + token);
+        redisTemplate.delete(RedisConstantsUtil.USER_LOGIN + token);
     }
 
 }

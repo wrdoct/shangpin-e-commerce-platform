@@ -4,6 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
 import com.atguigu.spzx.manager.service.ValidateCodeService;
 import com.atguigu.spzx.model.vo.system.ValidateCodeVo;
+import com.atguigu.spzx.utils.RedisConstantsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         String codeKey = UUID.randomUUID().toString().replaceAll("-", "");
         // 将验证码存储到Redis中 // key: uuid    value: 验证码值
         redisTemplate.opsForValue()
-                .set("user:login:validatecode:" + codeKey,
+                .set(RedisConstantsUtil.USER_LOGIN_VALIDATECODE + codeKey,
                         codeValue,
                         5,
                         TimeUnit.MINUTES);

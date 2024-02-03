@@ -6,6 +6,7 @@ import com.atguigu.spzx.model.entity.system.SysUser;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.utils.AuthContextUtil;
+import com.atguigu.spzx.utils.RedisConstantsUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
             return false;
         }
         // 如果token不为空，那么此时验证token的合法性--查询redis
-        String sysUserInfoJson = redisTemplate.opsForValue().get("user:login" + token);
+        String sysUserInfoJson = redisTemplate.opsForValue().get(RedisConstantsUtil.USER_LOGIN + token);
         // 如果redis查不到数据，返回错误提示
         if(StrUtil.isEmpty(sysUserInfoJson)) {
             responseNoLoginInfo(response) ;
@@ -51,7 +52,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
         AuthContextUtil.set(sysUser);
 
         // 重置Redis中的用户数据的有效时间
-        redisTemplate.expire("user:login" + token, 30, TimeUnit.MINUTES);
+        redisTemplate.expire(RedisConstantsUtil.USER_LOGIN + token, 30, TimeUnit.MINUTES);
         // 放行
         return true;
     }

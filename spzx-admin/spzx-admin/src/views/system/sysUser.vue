@@ -75,25 +75,25 @@
     </el-dialog> 
 
     <el-dialog v-model="dialogRoleVisible" title="分配角色" width="40%">
-    <el-form label-width="80px">
-        <el-form-item label="用户名">
-            <el-input disabled :value="sysUser.userName"></el-input>
-        </el-form-item>
+        <el-form label-width="80px">
+            <el-form-item label="用户名">
+                <el-input disabled :value="sysUser.userName"></el-input>
+            </el-form-item>
 
-        <el-form-item label="角色列表">
-            <el-checkbox-group v-model="userRoleIds">
-                <el-checkbox v-for="role in allRoles" :key="role.id" :label="role.id">
-                    {{ role.roleName }}
-                </el-checkbox>
-            </el-checkbox-group>
-        </el-form-item>
+            <el-form-item label="角色列表">
+                <el-checkbox-group v-model="userRoleIds">
+                    <el-checkbox v-for="role in allRoles" :key="role.id" :label="role.id">
+                        {{ role.roleName }}
+                    </el-checkbox>
+                </el-checkbox-group>
+            </el-form-item>
 
-        <el-form-item>
-            <el-button type="primary">提交</el-button>
-            <el-button @click="dialogRoleVisible = false">取消</el-button>
-        </el-form-item>
-    </el-form>
-</el-dialog>
+            <el-form-item>
+                <el-button type="primary">提交</el-button>
+                <el-button @click="dialogRoleVisible = false">取消</el-button>
+            </el-form-item>
+        </el-form>
+    </el-dialog>
 
     <!---数据表格-->
     <el-table :data="list" style="width: 100%">
@@ -135,8 +135,8 @@
 import { ref , onMounted } from 'vue'; 
 import { GetSysUserListByPage , SaveSysUser , UpdateSysUser , DeleteSysUserById} from '@/api/sysUser';
 import { ElMessage, ElMessageBox } from 'element-plus'
-// 用户头像的上传
-import { useApp } from '@/pinia/modules/app'
+import { useApp } from '@/pinia/modules/app' // 用户头像的上传
+import { GetAllRoleList } from '@/api/sysRole'; 
 
 // 表格数据模型
 const list = ref([
@@ -273,8 +273,12 @@ const allRoles = ref([
 ])
 const dialogRoleVisible = ref(false)
 const showAssignRole = async row => {
-  sysUser.value = row
-  dialogRoleVisible.value = true
+    sysUser.value = row
+    dialogRoleVisible.value = true
+
+    // 查询所有的角色数据
+    const {code , message , data } = await GetAllRoleList() ;
+    allRoles.value = data.allRolesList
 }
 </script>
 

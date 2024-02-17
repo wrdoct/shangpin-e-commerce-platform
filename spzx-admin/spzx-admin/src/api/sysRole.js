@@ -40,3 +40,11 @@ export const DeleteSysRoleById = (roleId) => {
         method: 'delete'
     })
 }
+
+// 查询所有的角色数据
+export const GetAllRoleList = () => {
+    return request({
+        url: `${base_api}/findAllRoles`,
+        method: 'get'
+    })
+}

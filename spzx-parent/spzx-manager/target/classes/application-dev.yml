@@ -29,3 +29,8 @@ spzx:
     noAuthUrls:
       - /admin/system/index/login
       - /admin/system/index/generateValidateCode
+  minio:
+    endpointUrl: http://192.168.177.128:9001 # docker的端口映射为 9001:9000
+    accessKey: admin
+    secreKey: admin123456
+    bucketName: spzx-bucket

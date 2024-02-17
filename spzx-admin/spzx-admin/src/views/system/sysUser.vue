@@ -132,8 +132,8 @@ const createTimes = ref([])
 
 //分页数据
 const pageParamsForm = {
-  page: 1, // 页码
-  limit: 10, // 每页记录数
+  page: 1, // 页码 pageNum
+  limit: 10, // 每页记录数 pageSize
 }
 const pageParams = ref(pageParamsForm)
 

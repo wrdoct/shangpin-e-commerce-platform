@@ -1,6 +1,7 @@
 package com.atguigu.spzx.manager.controller;
 
 import com.atguigu.spzx.manager.service.SysUserService;
+import com.atguigu.spzx.model.dto.system.AssginRoleDto;
 import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysRole;
 import com.atguigu.spzx.model.entity.system.SysUser;
@@ -29,24 +30,31 @@ public class SysUserController {
         return Result.build(pageInfo , ResultCodeEnum.SUCCESS) ;
     }
 
-    @Operation(summary = "添加角色")
+    @Operation(summary = "添加用户")
     @PostMapping(value = "/saveSysUser")
     public Result saveSysUser(@RequestBody SysUser sysUser) {
         sysUserService.saveSysUser(sysUser) ;
         return Result.build(null , ResultCodeEnum.SUCCESS) ;
     }
 
-    @Operation(summary = "修改角色")
+    @Operation(summary = "修改用户")
     @PutMapping(value = "/updateSysUser")
     public Result updateSysUser(@RequestBody SysUser sysUser) {
         sysUserService.updateSysUser(sysUser) ;
         return Result.build(null , ResultCodeEnum.SUCCESS) ;
     }
 
-    @Operation(summary = "删除角色")
+    @Operation(summary = "删除用户")
     @DeleteMapping(value = "/deleteById/{userId}")
     public Result deleteById(@PathVariable(value = "userId") Long userId) {
         sysUserService.deleteById(userId) ;
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+
+    @Operation(summary = "分配角色")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssginRoleDto assginRoleDto) {
+        sysUserService.doAssign(assginRoleDto) ;
         return Result.build(null , ResultCodeEnum.SUCCESS) ;
     }
 

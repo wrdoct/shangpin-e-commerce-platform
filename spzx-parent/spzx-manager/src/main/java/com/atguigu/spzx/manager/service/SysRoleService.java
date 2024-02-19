@@ -20,6 +20,6 @@ public interface SysRoleService {
     //删除角色
     void deleteById(Long roleId);
 
-    Map<String, Object> findAllRoles();
+    Map<String, Object> findAllRoles(Long userId);
 
 }

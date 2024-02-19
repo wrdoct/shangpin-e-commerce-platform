@@ -3,8 +3,10 @@ package com.atguigu.spzx.manager.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.atguigu.spzx.common.exception.GuiguException;
+import com.atguigu.spzx.manager.mapper.SysRoleUserMapper;
 import com.atguigu.spzx.manager.mapper.SysUserMapper;
 import com.atguigu.spzx.manager.service.SysUserService;
+import com.atguigu.spzx.model.dto.system.AssginRoleDto;
 import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
@@ -16,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.List;
@@ -30,6 +33,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    @Autowired
+    private SysRoleUserMapper sysRoleUserMapper ;
 
     @Override
     public LoginVo login(LoginDto loginDto) {
@@ -117,6 +123,20 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public void deleteById(Long userId) {
         sysUserMapper.deleteById(userId) ;
+    }
+
+    @Transactional
+    @Override
+    public void doAssign(AssginRoleDto assginRoleDto) {
+
+        // 删除之前的所有的用户所对应的角色数据
+        sysRoleUserMapper.deleteByUserId(assginRoleDto.getUserId()) ;
+
+        // 分配新的角色数据
+        List<Long> roleIdList = assginRoleDto.getRoleIdList();
+        roleIdList.forEach(roleId->{
+            sysRoleUserMapper.doAssign(assginRoleDto.getUserId(),roleId);
+        });
     }
 
 }

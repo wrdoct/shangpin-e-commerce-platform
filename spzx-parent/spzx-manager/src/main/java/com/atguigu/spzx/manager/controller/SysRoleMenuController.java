@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@Tag(name = "系统管理--角色菜单管理接口")
+@Tag(name = "系统管理帮助--角色菜单管理接口")
 @RestController
 @RequestMapping(value = "/admin/system/sysRoleMenu")
 public class SysRoleMenuController {

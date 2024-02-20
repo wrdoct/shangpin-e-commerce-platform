@@ -1,0 +1,3 @@
+<template>
+    categoryBrand
+</template>

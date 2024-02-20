@@ -26,7 +26,6 @@ export const useMenus = defineStore('menu', () => {
 
   const getFilterRoutes = (targetRoutes, ajaxRoutes) => {
     const filterRoutes = []
-
     ajaxRoutes.forEach(item => {
       const target = targetRoutes.find(target => target.name === item.name)
 
@@ -37,12 +36,43 @@ export const useMenus = defineStore('menu', () => {
         }
 
         if (item.children) {
+          targetChildren.splice(0, targetChildren.length); // 清空targetChildren再重新赋值
+          item.children.forEach(c =>{
+            let childRoute =  {
+              path: '/'+c.name,
+              name: c.name,
+              component: () => import('../../views/'+item.name+'/'+c.name+'.vue'),
+              meta:{
+                  title: c.title
+              },
+              hidden: false
+            }
+            targetChildren.push(childRoute)
+          })
           route.children = getFilterRoutes(targetChildren, item.children)
         }
 
         filterRoutes.push(route)
       }
     })
+    
+    // ajaxRoutes.forEach(item => {
+    //   const target = targetRoutes.find(target => target.name === item.name)
+
+    //   if (target) {
+    //     const { children: targetChildren, ...rest } = target
+    //     const route = {
+    //       ...rest,
+    //     }
+
+    //     if (item.children) {
+    //       route.children = getFilterRoutes(targetChildren, item.children)
+    //     }
+
+    //     filterRoutes.push(route)
+        
+    //   }
+    // })
 
     return filterRoutes
   }

@@ -9,7 +9,7 @@ export default [
     meta: {
       title: '商品管理',
     },
-    icon: 'Histogram',
+    icon: 'Goods',
     children: [
       {
         path: '/category',

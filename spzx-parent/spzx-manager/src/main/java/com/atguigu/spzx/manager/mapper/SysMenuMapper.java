@@ -19,6 +19,8 @@ public interface SysMenuMapper {
 
     List<SysMenu> selectListByUserId(Long userId);
 
+    List<SysMenu> selectListByUserIdSort(Long userId);
+
     SysMenu selectById(Long id) ;
 
 }

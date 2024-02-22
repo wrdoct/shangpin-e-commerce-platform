@@ -24,4 +24,19 @@ public class BrandServiceImpl implements BrandService {
         return pageInfo;
     }
 
+    @Override
+    public void save(Brand brand) {
+        brandMapper.save(brand) ;
+    }
+
+    @Override
+    public void updateById(Brand brand) {
+        brandMapper.updateById(brand) ;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        brandMapper.deleteById(id) ;
+    }
+
 }

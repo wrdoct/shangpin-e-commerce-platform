@@ -7,4 +7,10 @@ public interface BrandService {
 
     PageInfo<Brand> findByPage(Integer page, Integer limit);
 
+    void save(Brand brand);
+
+    void updateById(Brand brand);
+
+    void deleteById(Long id);
+
 }

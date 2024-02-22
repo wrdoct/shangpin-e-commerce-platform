@@ -8,10 +8,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "商品管理--品牌管理接口")
 @RestController
@@ -28,5 +25,25 @@ public class BrandController {
         return Result.build(pageInfo , ResultCodeEnum.SUCCESS) ;
     }
 
+    @Operation(summary = "添加品牌")
+    @PostMapping("save")
+    public Result save(@RequestBody Brand brand) {
+        brandService.save(brand);
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+
+    @Operation(summary = "修改品牌")
+    @PutMapping("updateById")
+    public Result updateById(@RequestBody Brand brand) {
+        brandService.updateById(brand);
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+
+    @Operation(summary = "删除品牌")
+    @DeleteMapping("/deleteById/{id}")
+    public Result deleteById(@PathVariable Long id) {
+        brandService.deleteById(id);
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
 
 }

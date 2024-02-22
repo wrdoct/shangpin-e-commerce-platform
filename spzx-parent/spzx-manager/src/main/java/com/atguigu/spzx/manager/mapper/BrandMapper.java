@@ -10,4 +10,10 @@ public interface BrandMapper {
 
     List<Brand> findByPage();
 
+    void save(Brand brand);
+
+    void updateById(Brand brand);
+
+    void deleteById(Long id);
+
 }

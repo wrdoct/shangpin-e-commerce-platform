@@ -21,7 +21,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-        @Operation(summary = "根据parentId获取下级节点")
+    @Operation(summary = "根据parentId获取下级节点")
     @GetMapping(value = "/findByParentId/{parentId}")
     public Result<List<Category>> findByParentId(@PathVariable Long parentId) {
         List<Category> list = categoryService.findByParentId(parentId);

@@ -25,6 +25,11 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<Brand> findAll() {
+        return brandMapper.findAll();
+    }
+
+    @Override
     public void save(Brand brand) {
         brandMapper.save(brand) ;
     }

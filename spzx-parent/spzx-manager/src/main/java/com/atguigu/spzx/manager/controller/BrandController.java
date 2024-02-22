@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "商品管理--品牌管理接口")
 @RestController
 @RequestMapping(value="/admin/product/brand")
@@ -18,11 +20,18 @@ public class BrandController {
     @Autowired
     private BrandService brandService ;
 
-    @Operation(summary = "列表查询")
+    @Operation(summary = "分页列表查询")
     @GetMapping("/{page}/{limit}")
     public Result<PageInfo<Brand>> findByPage(@PathVariable Integer page, @PathVariable Integer limit) {
         PageInfo<Brand> pageInfo = brandService.findByPage(page, limit);
         return Result.build(pageInfo , ResultCodeEnum.SUCCESS) ;
+    }
+
+    @Operation(summary = "品牌列表查询")
+    @GetMapping("/findAll")
+    public Result findAll() {
+        List<Brand> list = brandService.findAll();
+        return Result.build(list , ResultCodeEnum.SUCCESS) ;
     }
 
     @Operation(summary = "添加品牌")

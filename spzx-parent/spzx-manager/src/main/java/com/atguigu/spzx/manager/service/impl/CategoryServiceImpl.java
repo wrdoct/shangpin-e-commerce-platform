@@ -83,7 +83,9 @@ public class CategoryServiceImpl implements CategoryService {
             }
 
             // 写出数据到浏览器端
-            EasyExcel.write(response.getOutputStream(), CategoryExcelVo.class).sheet("分类数据").doWrite(categoryExcelVoList);
+            EasyExcel.write(response.getOutputStream(),
+                    CategoryExcelVo.class).sheet("分类数据")
+                    .doWrite(categoryExcelVoList);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,7 +100,8 @@ public class CategoryServiceImpl implements CategoryService {
             //调用read方法读取excel数据
             EasyExcel.read(file.getInputStream(),
                     CategoryExcelVo.class,
-                    excelListener).sheet().doRead();
+                    excelListener).sheet()
+                    .doRead();
         } catch (IOException e) {
             throw new GuiguException(ResultCodeEnum.DATA_ERROR);
         }

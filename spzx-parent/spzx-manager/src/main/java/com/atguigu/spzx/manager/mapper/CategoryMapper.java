@@ -7,6 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
-    public abstract List<Category> selectByParentId(Long parentId);
-    public abstract int countByParentId(Long id);
+    List<Category> selectByParentId(Long parentId);
+    int countByParentId(Long id);
+
+    List<Category> selectAll();
+
+    void batchInsert(List<Category> categoryList);
+
 }

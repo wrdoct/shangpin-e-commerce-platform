@@ -4,7 +4,6 @@ import com.atguigu.spzx.manager.service.SysMenuService;
 import com.atguigu.spzx.manager.service.SysUserService;
 import com.atguigu.spzx.manager.service.ValidateCodeService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
-import com.atguigu.spzx.model.entity.system.SysUser;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.LoginVo;
@@ -13,7 +12,6 @@ import com.atguigu.spzx.model.vo.system.ValidateCodeVo;
 import com.atguigu.spzx.utils.AuthContextUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +63,19 @@ public class IndexController {
     }
 
     // 用户登录
+    // 在使用knife4j进行调试时，要在该接口下
+    // ‘调试’ --> ‘AfterScript’ 中粘贴如下代码，将token设置到请求头中：
+/*    var code=ke.response.data.code;
+    if(code===200){
+        //判断,如果服务端响应code是0才执行操作
+        //获取token
+        var token=ke.response.data.data.token;
+        //1、如何参数是Header，则设置当前逻辑分组下的全局Header
+        ke.global.setAllHeader("token",token);
+        //2、如果全局参数是query类型,则设置当前逻辑分组下的全局Parameter,开发者自行选择
+        // ke.global.setAllParameter("token",token);
+    }
+ */
     @Operation(summary = "登录接口")
     @PostMapping("/login")
     public Result login(@RequestBody LoginDto loginDto){

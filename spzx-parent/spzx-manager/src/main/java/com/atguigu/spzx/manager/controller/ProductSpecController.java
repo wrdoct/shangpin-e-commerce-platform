@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "商品管理--商品规格接口")
 @RestController
 @RequestMapping(value="/admin/product/productSpec")
@@ -44,6 +46,13 @@ public class ProductSpecController {
     public Result removeById(@PathVariable Long id) {
         productSpecService.deleteById(id);
         return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+
+    @Operation(summary = "加载商品规格数据")
+    @GetMapping("findAll")
+    public Result findAll() {
+        List<ProductSpec> list = productSpecService.findAll();
+        return Result.build(list , ResultCodeEnum.SUCCESS) ;
     }
 
 }

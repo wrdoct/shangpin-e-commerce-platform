@@ -278,7 +278,7 @@ const showAssignRole = async row => {
     allRoles.value = data.allRolesList
 
     // 获取当前登录用户的角色数据
-  userRoleIds.value = data.sysUserRoles
+    userRoleIds.value = data.sysUserRoles
 }
 
 // 角色分配按钮事件处理函数

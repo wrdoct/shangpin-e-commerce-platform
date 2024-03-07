@@ -80,3 +80,11 @@ docker pull nginx:latest
 docker run -d -p 80:80 --name nginx-spzx -v nginx_html:/usr/share/nginx/html -v nginx_conf:/etc/nginx/ -v nginx_logs:/var/log/nginx  nginx
 ```
 
+
+
+```
+docker pull nacos/nacos-server:v2.2.2
+
+docker run --name nacos -e MODE=standalone -p 8848:8848 -p 9848:9848 -d nacos/nacos-server:v2.2.2
+```
+

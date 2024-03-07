@@ -7,7 +7,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.177.128:8848
+        server-addr: http://192.168.177.128:8848  # /nacos
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

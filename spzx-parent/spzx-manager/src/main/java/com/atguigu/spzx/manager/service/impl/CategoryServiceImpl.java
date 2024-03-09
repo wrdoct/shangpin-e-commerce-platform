@@ -97,7 +97,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void importData(MultipartFile file) {
         try {
-            //创建监听器对象，传递mapper对象
+            //创建监听器对象，传递mapper对象 -- 每次调用都要new一个对象，不能交给SpringBoot管理--会导致并发问题
             ExcelListener<CategoryExcelVo> excelListener = new ExcelListener<>(categoryMapper);
             //调用read方法读取excel数据
             EasyExcel.read(file.getInputStream(), CategoryExcelVo.class, excelListener)

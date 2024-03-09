@@ -60,18 +60,21 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public void removeById(Long id) {
-        int count = sysMenuMapper.countByParentId(id);  // 先查询是否存在子菜单，如果存在不允许进行删除
+        // 先查询是否存在子菜单，如果存在不允许进行删除
+        int count = sysMenuMapper.countByParentId(id);
         if (count > 0) {
             throw new GuiguException(ResultCodeEnum.NODE_ERROR);
         }
-        sysMenuMapper.deleteById(id);		// 不存在子菜单直接删除
+        // 不存在子菜单直接删除
+        sysMenuMapper.deleteById(id);
     }
 
     @Override
     public List<SysMenuVo> findUserMenuList() {
 
+        // 获取当前登录用户的id
         SysUser sysUser = AuthContextUtil.get();
-        Long userId = sysUser.getId();          // 获取当前登录用户的id
+        Long userId = sysUser.getId();
 
 //        List<SysMenu> sysMenuList = sysMenuMapper.selectListByUserId(userId) ;
         List<SysMenu> sysMenuList = sysMenuMapper.selectListByUserIdSort(userId) ;
@@ -81,7 +84,9 @@ public class SysMenuServiceImpl implements SysMenuService {
         return this.buildMenus(sysMenuTreeList);
     }
 
-    // 将List<SysMenu>对象转换成List<SysMenuVo>对象
+    /**
+     * 将List<SysMenu>对象转换成List<SysMenuVo>对象
+     */
     private List<SysMenuVo> buildMenus(List<SysMenu> menus) {
 
         List<SysMenuVo> sysMenuVoList = new LinkedList<SysMenuVo>();

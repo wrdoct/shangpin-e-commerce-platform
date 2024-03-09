@@ -26,6 +26,7 @@
             </el-form-item>
         </el-form>
     </el-dialog>
+    
     <el-table
         :data="list"
         style="width: 100%; margin-bottom: 20px"

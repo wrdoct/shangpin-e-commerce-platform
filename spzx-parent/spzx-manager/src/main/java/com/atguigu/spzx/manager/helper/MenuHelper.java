@@ -5,6 +5,7 @@ import com.atguigu.spzx.model.entity.system.SysMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+// 封装树形菜单数据
 public class MenuHelper {
 
     /**
@@ -15,6 +16,7 @@ public class MenuHelper {
     public static List<SysMenu> buildTree(List<SysMenu> sysMenuList) {
         List<SysMenu> trees = new ArrayList<>();
         for (SysMenu sysMenu : sysMenuList) {
+            //找到递归操作入口--第一层菜单
             if (sysMenu.getParentId().longValue() == 0) {
                 trees.add(findChildren(sysMenu,sysMenuList));
             }
@@ -34,7 +36,7 @@ public class MenuHelper {
                 //if (sysMenu.getChildren() == null) {
                 //    sysMenu.setChildren(new ArrayList<>());
                 //}
-                sysMenu.getChildren().add(findChildren(it,treeNodes));
+                sysMenu.getChildren().add(findChildren(it,treeNodes)); // it就是下层数据，进行封装
             }
         }
         return sysMenu;

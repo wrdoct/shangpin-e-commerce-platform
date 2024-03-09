@@ -38,7 +38,19 @@ spzx-parent： 尚品甄选项目的父工程，进行项目依赖的统一管�
 ```shell
 docker pull mysql:8.0.30
 
-docker run -d --name mysql -p 30036:3306 -v mysql_data:/var/lib/mysql -v mysql_conf:/etc/mysql --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=1234 mysql:8.0.30
+docker run -d --name mysql -p 30036:3306 -v mysql_data:/var/lib/mysql -v mysql_conf:/etc/mysql -v /etc/localtime:/etc/localtime --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=1234 mysql:8.0.30
+
+## mysql设置时间
+# 查看当前时间
+SELECT now();
+# 查看时区信息
+show variables like "%time_zone%";
+# 修改mysql全局时区为北京时间
+set global time_zone = '+8:00';
+# 修改当前会话时区
+set time_zone = '+8:00';
+# 立即生效
+flush privileges;
 ```
 
 

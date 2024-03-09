@@ -4,6 +4,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.util.ListUtils;
 import com.atguigu.spzx.manager.mapper.CategoryMapper;
+import com.atguigu.spzx.model.entity.product.Category;
 import com.atguigu.spzx.model.vo.product.CategoryExcelVo;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
     }
 
     private void saveData() {
-        categoryMapper.batchInsert(cachedDataList);
+        categoryMapper.batchInsert((List<Category>)cachedDataList);
     }
 
 }

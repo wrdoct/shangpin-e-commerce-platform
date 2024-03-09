@@ -26,6 +26,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
     }
 
     // 每解析一行数据就会调用一次该方法
+    // 从第二行开始读取，把每行读取的内容封装到T o对象里
     @Override
     public void invoke(T o, AnalysisContext analysisContext) {
         CategoryExcelVo data = (CategoryExcelVo)o;

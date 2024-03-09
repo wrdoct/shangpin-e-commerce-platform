@@ -90,6 +90,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new GuiguException(ResultCodeEnum.DATA_ERROR);
         }
     }
 

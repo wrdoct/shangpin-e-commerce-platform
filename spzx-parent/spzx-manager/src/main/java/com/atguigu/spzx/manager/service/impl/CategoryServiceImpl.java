@@ -84,8 +84,8 @@ public class CategoryServiceImpl implements CategoryService {
             }
 
             // 写出数据到浏览器端
-            EasyExcel.write(response.getOutputStream(),
-                    CategoryExcelVo.class).sheet("分类数据")
+            EasyExcel.write(response.getOutputStream(), CategoryExcelVo.class)
+                    .sheet("分类数据")
                     .doWrite(categoryExcelVoList);
 
         } catch (IOException e) {
@@ -100,9 +100,8 @@ public class CategoryServiceImpl implements CategoryService {
             //创建监听器对象，传递mapper对象
             ExcelListener<CategoryExcelVo> excelListener = new ExcelListener<>(categoryMapper);
             //调用read方法读取excel数据
-            EasyExcel.read(file.getInputStream(),
-                    CategoryExcelVo.class,
-                    excelListener).sheet()
+            EasyExcel.read(file.getInputStream(), CategoryExcelVo.class, excelListener)
+                    .sheet()
                     .doRead();
         } catch (IOException e) {
             throw new GuiguException(ResultCodeEnum.DATA_ERROR);

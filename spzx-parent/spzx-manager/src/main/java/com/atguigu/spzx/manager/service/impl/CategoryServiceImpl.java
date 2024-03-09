@@ -51,15 +51,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void exportData(HttpServletResponse response) {
-
         try {
 
-            // 设置响应结果类型
+            // 设置响应头信息和其他信息--响应结果类型
             response.setContentType("application/vnd.ms-excel");
             response.setCharacterEncoding("utf-8");
 
             // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
             String fileName = URLEncoder.encode("分类数据", "UTF-8");
+
+            // 设置响应头信息
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
             //response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
 

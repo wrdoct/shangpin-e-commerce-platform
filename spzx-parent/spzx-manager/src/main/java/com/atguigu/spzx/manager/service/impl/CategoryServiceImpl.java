@@ -35,8 +35,8 @@ public class CategoryServiceImpl implements CategoryService {
 
             // 遍历分类的集合，获取每一个分类数据
             categoryList.forEach(item -> {
-
-                // 查询该分类下子分类的数量 -- hasChildren在数据库中没有该字段，作用是前端的分类列表是否显示>
+                // 查询该分类下子分类的数量
+                // hasChildren在数据库中没有该字段，作用是前端的分类列表是否显示>
                 int count = categoryMapper.countByParentId(item.getId());
                 if(count > 0) {
                     item.setHasChildren(true);

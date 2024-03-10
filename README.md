@@ -100,3 +100,6 @@ docker pull nacos/nacos-server:v2.2.2
 docker run --name nacos -e MODE=standalone -p 8848:8848 -p 9848:9848 -d nacos/nacos-server:v2.2.2
 ```
 
+
+
+删除/var/snap/docker/common/var-lib-docker/volumes/nginx_html/_data目录下的文件，将h5目录下的文件上传到该目录下

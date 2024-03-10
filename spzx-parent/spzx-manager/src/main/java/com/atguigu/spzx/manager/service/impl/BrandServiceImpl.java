@@ -18,7 +18,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public PageInfo<Brand> findByPage(Integer page, Integer limit) {
-        PageHelper.startPage(page, limit);
+        PageHelper.startPage(page, limit); // 设置分页参数
         List<Brand> brandList = brandMapper.findByPage() ;
         PageInfo pageInfo = new PageInfo(brandList);
         return pageInfo;
